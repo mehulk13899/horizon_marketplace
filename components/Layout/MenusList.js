@@ -16,21 +16,15 @@ const MenusList = ({ user }) => {
 				<Link href="/">
 					<a className="navbar-brand">
 						<img
-							src="/images/logo.png"
-							alt="Logo"
-							className="white-logo"
-						/>
-
-						<img
 							src="/images/logo-2.png"
 							style={{
 								objectFit: 'contain',
-								width: 100,
+								width: "50%",
 								height: 100
 							}}
 							alt="Logo"
 							className="black-logo"
-						/>
+						/> 
 					</a>
 				</Link>
 				<div
@@ -38,7 +32,7 @@ const MenusList = ({ user }) => {
 					id="navbarSupportedContent"
 				>
 					<ul className="navbar-nav m-auto">
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<Link
 								href="/discover"
 								activeClassName="active"
@@ -83,7 +77,7 @@ const MenusList = ({ user }) => {
 									</Link>
 								</li>
 							</ul>
-						</li>
+						</li> */}
 						<li className="nav-item">
 							<a className="nav-link">Crypto Game
 								<i className="ri-arrow-down-s-line"></i>

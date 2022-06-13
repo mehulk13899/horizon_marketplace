@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }) {
 				<ModalProvider>
 					<ManagedModal />
 					<Head>
-						<title>Cryptonium NFT Marketplace</title>
+						<title>Horizon NFT Marketplace</title>
 						<meta
 							name="viewport"
 							content="initial-scale=1.0, width=device-width"

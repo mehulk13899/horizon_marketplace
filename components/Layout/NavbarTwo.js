@@ -66,8 +66,9 @@ const NavbarTwo = () => {
 									<img
 										style={{
 											objectFit: 'contain',
-											width: 70,
-											height: 70
+											width: "25%",
+											marginLeft:10,
+											height: "70px"
 										}}
 										src="../images/logo-2.png"
 										alt="Footer Logo"

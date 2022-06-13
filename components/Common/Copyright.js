@@ -10,8 +10,8 @@ const Copyright = () => {
 							<div className="copy-right-text">
 								<p>
 									© 2022 All Rights Reserved by{" "}
-									<a href="https://www.cryptonium.in/">
-										Cryptonium
+									<a href="https://www.horizon.whiteorigin.in/">
+										White Horizon
 									</a>
 								</p>
 
