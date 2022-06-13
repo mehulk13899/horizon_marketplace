@@ -10,7 +10,6 @@ import Layout from '../components/Layout/Layout';
 import { useRegisterMutation } from '../hooks/Web2/mutations/useRegisterMutation';
 import { useRouter } from 'next/router';
 import { handleLogin, handleLogout } from '../utils/auth';
-import mixpanel from 'mixpanel-browser';
 
 const AddWallet = () => {
   const router = useRouter();
@@ -45,13 +44,6 @@ const AddWallet = () => {
               {
                 onSuccess: (res) => {
                   if (res?.data?.statusCode == 200) {
-                    if (process.env.NEXT_PUBLIC_ENV == 'production') {
-                      mixpanel.init(process.env.NEXT_PUBLIC_MXTOOL, { debug: process.env.NEXT_PUBLIC_ENV == 'production' ? false : true });
-                      mixpanel.track('Sign up', {
-                        walletAddress: user?.get('ethAddress'),
-                        chainId: selectchain
-                      });
-                    }
                     handleLogin(res?.data);
                     router.replace('/profile')
                     dispatch({ type: Actions.SET_USER, user: res?.data?.user })
