@@ -20,7 +20,7 @@ const Auction = ({ }) => {
                     </div>
                     <div className='content'>
                         <h3>
-                            <a href='/item-details'>{auction?.name}</a>
+                            <a href='#'>{auction?.name}</a>
                         </h3>
                         <div className='content-in'>
                             <div className='featured-card-left'>
@@ -29,7 +29,7 @@ const Auction = ({ }) => {
                                 <h4>Created Date: {new Date(auction?.auctionDate).toDateString()}</h4>
                             </div>
 
-                            <a href='/item-details' className='featured-content-btn'>
+                            <a href='#' className='featured-content-btn'>
                                 <i className='ri-arrow-right-line'></i>
                             </a>
                         </div>

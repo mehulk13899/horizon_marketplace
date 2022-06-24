@@ -68,7 +68,7 @@ const TrendingArea = () => {
               <OwlCarousel {...options}>
                 <div className='trending-card'>
                   <div className='trending-card-img'>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a>
                         <img
                           src='../images/trending/trending-style1.jpg'
@@ -89,7 +89,7 @@ const TrendingArea = () => {
 
                   <div className='content'>
                     <h3>
-                      <Link href='/item-details'>
+                      <Link href='#'>
                         <a>Les Immortal's</a>
                       </Link>
                     </h3>
@@ -112,7 +112,7 @@ const TrendingArea = () => {
 
                 <div className='trending-card'>
                   <div className='trending-card-img'>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a>
                         <img
                           src='../images/trending/trending-style2.jpg'
@@ -133,7 +133,7 @@ const TrendingArea = () => {
 
                   <div className='content'>
                     <h3>
-                      <Link href='/item-details'>
+                      <Link href='#'>
                         <a>Industrial Revolution</a>
                       </Link>
                     </h3>
@@ -157,7 +157,7 @@ const TrendingArea = () => {
 
                 <div className='trending-card'>
                   <div className='trending-card-img'>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a>
                         <img
                           src='../images/trending/trending-style3.jpg'
@@ -178,11 +178,11 @@ const TrendingArea = () => {
 
                   <div className='content'>
                     <h3>
-                      <Link href='/item-details'>
+                      <Link href='#'>
                         <a>Tranquility (Modal)</a>
                       </Link>
                     </h3>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a className='trending-user-option'>
                         <img
                           src='../images/trending/trending-user3.jpg'
@@ -201,7 +201,7 @@ const TrendingArea = () => {
 
                 <div className='trending-card'>
                   <div className='trending-card-img'>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a>
                         <img
                           src='../images/trending/trending-style4.jpg'
@@ -222,7 +222,7 @@ const TrendingArea = () => {
 
                   <div className='content'>
                     <h3>
-                      <Link href='/item-details'>
+                      <Link href='#'>
                         <a>Walking On Air</a>
                       </Link>
                     </h3>
@@ -245,7 +245,7 @@ const TrendingArea = () => {
 
                 <div className='trending-card'>
                   <div className='trending-card-img'>
-                    <Link href='/item-details'>
+                    <Link href='#'>
                       <a>
                         <img
                           src='../images/trending/trending-style5.jpg'
@@ -266,7 +266,7 @@ const TrendingArea = () => {
 
                   <div className='content'>
                     <h3>
-                      <Link href='/item-details'>
+                      <Link href='#'>
                         <a>To Infinity</a>
                       </Link>
                     </h3>

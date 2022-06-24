@@ -17,7 +17,7 @@ export default function NFTComponentBlockChainSearch({ nft }) {
                 </div>
                 <div className='content'>
                     <h3>
-                        <a href='/item-details'>{nft?.metadata?.name ? nft?.metadata?.name : nft?.name}</a>
+                        <a href='#'>{nft?.metadata?.name ? nft?.metadata?.name : nft?.name}</a>
                     </h3>
                     <div className='content-in'>
                         <div className='featured-card-left'>

@@ -6,7 +6,7 @@ export default function NFTMasonry({ nft }) {
                 <div className="imageBox">
                     <div className='featured-card box-shadow'>
                         <div className='featured-card-img'>
-                            <a href='/item-details'>
+                            <a href='#'>
                                 <img
                                     key={nft?.token_uri}
                                     src={nft?.image_url}
@@ -23,7 +23,7 @@ export default function NFTMasonry({ nft }) {
                         </div>
                         <div className='content'>
                             <h3>
-                                <a href='/item-details'>{
+                                <a href='#'>{
                                     nft?.name ? nft?.name :
                                         nft?.metadata?.name ? nft?.metadata?.name : ""
                                 }</a>

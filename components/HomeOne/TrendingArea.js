@@ -55,7 +55,7 @@ const TrendingArea = ({ data }) => {
 
 						<div className="col-lg-4 col-md-5">
 							<div className="trending-btn text-end">
-								<Link href="/item-details">
+								<Link href="#">
 									<a className="default-btn border-radius-5">
 										Explore More
 									</a>

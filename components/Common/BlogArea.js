@@ -63,7 +63,7 @@ const BlogArea = () => {
             <div className='col-lg-4 col-md-6'>
               <div className='blog-card'>
                 <div className='blog-img'>
-                  <Link href='/item-details'>
+                  <Link href='#'>
                     <a>
                       <img src='../images/blog/blog-img2.jpg' alt='Images' />
                     </a>

@@ -5,7 +5,7 @@ export default function NFTComponentBlockChain({ nft }) {
         <div className='col-lg-3 col-md-4'>
             <div className='featured-card box-shadow'>
                 <div className='featured-card-img'>
-                    <a href='/item-details'>
+                    <a href='#'>
                         <img src={nft?.image_url}
                             onError={({ currentTarget }) => {
                                 currentTarget.onerror = null; // prevents looping
@@ -22,7 +22,7 @@ export default function NFTComponentBlockChain({ nft }) {
                 </div>
                 <div className='content'>
                     <h3>
-                        <a href='/item-details'>{nft?.name}</a>
+                        <a href='#'>{nft?.name}</a>
                     </h3>
                     <div className='content-in'>
                         <div className='featured-card-left'>
@@ -33,7 +33,7 @@ export default function NFTComponentBlockChain({ nft }) {
                             <h4>Symbol: {nft?.symbol}</h4>
                         </div>
 
-                        <a href='/item-details' className='featured-content-btn'>
+                        <a href='#' className='featured-content-btn'>
                             <i className='ri-arrow-right-line'></i>
                         </a>
                     </div>
