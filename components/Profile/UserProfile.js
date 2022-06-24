@@ -160,13 +160,13 @@ const UserProfile = () => {
                   >
                     <ul className='tabs author-tabs'>
                       <TabList>
-                        <Tab>
+                        {/* <Tab>
                           <a>Update Profile</a>
-                        </Tab>
+                        </Tab> */}
                         <Tab>
                           <a>UnMinted NFT's</a>
                         </Tab>
-                        <Tab>
+                        {/* <Tab>
                           <a>NFT's</a>
                         </Tab>
                         <Tab>
@@ -174,7 +174,7 @@ const UserProfile = () => {
                         </Tab>
                         <Tab>
                           <a>Auctions</a>
-                        </Tab>
+                        </Tab> */}
                         {/* <Tab>
                           <a>Saved Items</a>
                         </Tab> */}
@@ -183,7 +183,7 @@ const UserProfile = () => {
                   </div>
                   {/* <hr style={{ color: 'white' }}></hr> */}
                   <div className='tab_content author_tab_content'>
-                    <TabPanel>
+                    {/* <TabPanel>
                       <div className='tabs_item'>
                         <div className='row justify-content-left'>
                           <div className='collection-form-area'>
@@ -293,7 +293,7 @@ const UserProfile = () => {
                         </div>
 
                       </div>
-                    </TabPanel>
+                    </TabPanel> */}
                     <TabPanel>
                       <div className='tabs_item'>
                         <div className='row justify-content-left'>
@@ -304,35 +304,18 @@ const UserProfile = () => {
                                   data?.user?.nfts?.filter((nft) => !nft.nft_is_minted)?.map((nft) => (
                                     <>
                                       <NFTHeadlessDesign
-                                        title={"Mint NFT"}
+                                        title={"Open NFT"}
                                         nft={nft} />
                                     </>
                                   ))}
                               </div>
-                              {/* <XMasonry>
-                                {data?.user?.nfts?.filter((nft) => !nft.nft_is_minted).map((nft) => (
-                                  <XBlock key={nft?.id}>
-                                    {
-                                      <NFTComponentDatabase
-                                        nft={nft}
-                                        openDialogTitle={"Mint NFT"}
-                                        user={data?.user}
-                                        editOrDelete={true}
-                                        profile={true}
-                                        formCollection={false}
-                                      />
-                                    }
-
-                                  </XBlock>
-                                ))}
-                              </XMasonry> */}
                             </div>
                           </div>
                         </div>
                         {/* <CreateAuction nfts={data?.user?.nfts?.filter((nft) => !nft.auction_iscreated)}></CreateAuction> */}
                       </div>
                     </TabPanel>
-                    <TabPanel>
+                    {/* <TabPanel>
                       <div className='tabs_item'>
                         <div className='row justify-content-left'>
                           <div align="center">
@@ -342,8 +325,8 @@ const UserProfile = () => {
                           </div>
                         </div>
                       </div>
-                    </TabPanel>
-                    <TabPanel>
+                    </TabPanel> */}
+                    {/* <TabPanel>
                       <div className='tabs_item'>
                         <div className='row justify-content-left'>
                           <div align="center">
@@ -377,7 +360,7 @@ const UserProfile = () => {
                           </div>
                         </div>
                       </div>
-                    </TabPanel>
+                    </TabPanel> */}
                     {/* <TabPanel>
                       <div className='tabs_item'>
                         <div className='row justify-content-left'>

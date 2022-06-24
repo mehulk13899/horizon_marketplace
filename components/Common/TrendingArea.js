@@ -47,7 +47,7 @@ const TrendingArea = ({ bg, trendingData }) => {
 					<div className="row">
 						<div className="col-lg-8 col-md-6">
 							<div className="section-title">
-								<h2>Trending Artwork</h2>
+								<h2>Trending NFTs</h2>
 							</div>
 						</div>
 
@@ -61,7 +61,6 @@ const TrendingArea = ({ bg, trendingData }) => {
 							</div>
 						</div>
 					</div>
-
 					<div className="trending-slider pt-45">
 						{display ? (
 							<OwlCarousel {...options}>

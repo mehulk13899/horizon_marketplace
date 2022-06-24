@@ -32,7 +32,7 @@ const AddWallet = () => {
     }
     if (!isAuthenticated && selectchain) {
       await switchNetwork(selectchain)
-      await authenticate({ signingMessage: "My custom message" })
+      await authenticate({ signingMessage: "Horizon Marketplace Want to Access your account." })
         .then(async (user) => {
           if (authError)
             toast.error(authError.message)

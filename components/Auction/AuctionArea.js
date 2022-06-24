@@ -30,7 +30,6 @@ const AuctionArea = ({ }) => {
 								</>
 							)}
 
-						<Pagination />
 					</div>
 				</div>
 			</div>

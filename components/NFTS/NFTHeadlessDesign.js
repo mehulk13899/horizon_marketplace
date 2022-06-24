@@ -20,7 +20,6 @@ export default function NFTHeadlessDesign({ nft, title: openDialogTitle, price =
     const { Moralis, isAuthenticated } = useMoralis();
     const contractProcessor = useWeb3ExecuteFunction();
     async function mintNFTHandle() {
-
         const { attributes, created_at, created_by,
             cryptoCost, cryptoType, description,
             edition, image, name, unique_string } = nft;
@@ -85,7 +84,7 @@ export default function NFTHeadlessDesign({ nft, title: openDialogTitle, price =
                             cursor: "pointer"
                         }}
                         onClick={() => {
-                            router.push(`/nft/${nft?.token_id}`)
+                            router.push(`/nft/${nft?.id}`)
                         }
                         }
                         onError={({ currentTarget }) => {
@@ -122,8 +121,6 @@ export default function NFTHeadlessDesign({ nft, title: openDialogTitle, price =
                                 <h2 className="textgraycolor">Price</h2>
                                 <h3 className="textwhitecolor">
                                     <img src="../images/priceicon.svg" /> <strong>0,006</strong></h3>
-                                {/* <h4 className="textgraycolor"><span> */}
-                                {/* <img src="../images/hearticon.svg" /></span> 0</h4> */}
                             </div>
                         </> : <></>}
 

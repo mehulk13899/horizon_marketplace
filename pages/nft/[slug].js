@@ -1,26 +1,33 @@
-import PageBanner from "../../components/Common/PageBanner";
-import ItemDetailsArea from "../../components/ItemDetails/ItemDetailsArea";
-import TrendingArea from "../../components/Common/TrendingArea";
 import baseUrl from "../../utils/baseUrl";
+import ItemDetailsHistory from "../../components/ItemDetails/ItemDetailsHistory";
+import ItemDetailsDescription from "../../components/ItemDetails/ItemDetailsDescription";
 
-const ItemDetails = ({ data, trendingData }) => {
+const ItemDetails = ({ data }) => {
 	return (
 		<>
-			<PageBanner
-				bannerHeading={data.name}
-				parentTitle="Discover"
-				pageTitle={data.name}
-				bg="inner-bg12"
-			/>
+			<div className="item-details-area pt-100 pb-70">
+				<div className="container">
+					<div className="row">
+						<div className="col-lg-6">
+							<div className="item-details-left-side pr-20">
+								<div className="item-details-img">
+									<img
+										src={data?.image_url}
+										alt="Images"
+									/>
+								</div>
+								<ItemDetailsHistory />
+							</div>
+						</div>
 
-			<ItemDetailsArea data={data[0]} key={data[0]?.id} />;
-
-			<TrendingArea
-				trendingData={trendingData}
-				bg="trending-area-bg-two"
-			/>
-
-
+						<div className="col-lg-6">
+							<div className="item-details-dsce">
+								<ItemDetailsDescription data={data} />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
@@ -29,17 +36,8 @@ export async function getServerSideProps(ctx) {
 	const { slug } = ctx.query;
 	const response = await fetch(`${baseUrl}/nfts/${slug}`);
 	const data = await response.json();
-	const trendinfRes = await fetch(`${baseUrl}/nfts/getTrendingArtwork`);
-	const trendingData = await trendinfRes.json();
-
-	if (!trendingData) {
-		return {
-			notFound: true,
-		};
-	}
-
 	return {
-		props: { data, trendingData }, // will be passed to the page component as props
+		props: { data }, // will be passed to the page component as props
 	};
 }
 

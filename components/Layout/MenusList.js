@@ -78,7 +78,7 @@ const MenusList = ({ user }) => {
 								</li>
 							</ul>
 						</li> */}
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<a className="nav-link">Crypto Game
 								<i className="ri-arrow-down-s-line"></i>
 							</a>
@@ -100,7 +100,7 @@ const MenusList = ({ user }) => {
 									</Link>
 								</li>
 							</ul>
-						</li>
+						</li> */}
 
 
 						{web3Authentication && (

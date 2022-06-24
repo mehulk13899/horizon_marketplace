@@ -5,7 +5,6 @@ import formatDate from "../../utils/formatDate";
 const ItemDetailsDescription = ({
 	data,
 	collectionName = "Cryptonium",
-	itemOwner,
 	size,
 }) => {
 	return (
@@ -26,13 +25,13 @@ const ItemDetailsDescription = ({
 										<div className="images">
 											<a href={`/author-profile?author_name=${data?.created_by}`}>
 												<img
-													src={(data?.profile_photo) ? (data?.profile_photo) : "../images/author/author-user13.png"}
+													src={(data?.author?.profile_photo) ? (data?.author?.profile_photo) : "../images/author/author-user13.png"}
 													alt="Images"
 												/>
 												<i className="ri-check-line"></i>
 											</a>
 										</div>
-										<span>{data?.created_by}</span>
+										<span>{data?.author?.username ? data?.author?.username : "Unnamed"}</span>
 									</div>
 								</div>
 							</div>
@@ -41,15 +40,15 @@ const ItemDetailsDescription = ({
 									<h3>Collection</h3>
 									<div className="content">
 										<div className="images">
-											<a href={`/collection-nft-details/${data?.collection_id}`}>
+											<a href={`/collection-nft-details/${data?.collection[0]?.collection_id}`}>
 												<img
-													src={data?.collection_logo_image ? data?.collection_logo_image : "../images/author/author-user13.png"}
+													src={data?.collection[0]?.collection_logo_image ? data?.collection[0]?.collection_logo_image : "../images/author/author-user13.png"}
 													alt="Images"
 												/>
 											</a>
 										</div>
 
-										<span>{data?.collection_name}</span>
+										<span>{data?.collection[0]?.collection_name}</span>
 									</div>
 								</div>
 							</div>
@@ -81,10 +80,6 @@ const ItemDetailsDescription = ({
 									Total Likes:
 									<b>: {data?.total_like ? data?.total_like : 0}</b>
 								</li>
-								<li>
-									Total Bookmark:
-									<b>: {data?.total_bookmark ? data?.total_bookmark : 0}</b>
-								</li>
 							</ul>
 						</div>
 						<hr></hr>
@@ -92,14 +87,14 @@ const ItemDetailsDescription = ({
 						<div className="item-details-user-item">
 							<div className="images">
 								<img
-									src="../images/Item-details/Item-details-user3.jpg"
+									src={(data?.author?.profile_photo) ? (data?.author?.profile_photo) : "../images/author/author-user13.png"}
 									alt="Images"
 								/>
 								<i className="ri-check-line"></i>
 							</div>
 
 							<div className="content">
-								<h3>{itemOwner}</h3>
+								<h3>{data?.author?.username ? data?.author?.username : "Unknown"}</h3>
 								<span>Item Owner</span>
 							</div>
 						</div>

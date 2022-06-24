@@ -5,6 +5,11 @@ const fetchCollectionData = async ({ }) => {
   const { data } = await http.get('/collection');
   return data;
 };
+const fetchCollectionDataTrending = async ({ }) => {
+  const { data } = await http.get('/collection/tranding?limit=10');
+  return data;
+};
+
 const fetchMoralisCollection = async ({ queryKey }) => {
   const { data } = await http.post('/moralis/getCollection', queryKey[1]);
   localStorage.setItem('collection', JSON.stringify(data));
@@ -16,8 +21,14 @@ const fetchMoralisNFTS = async ({ queryKey }) => {
   const { data } = await http.post('/moralis/getNft', queryKey[1]);
   return data;
 };
-const useCollections = (options = {}) => {
+const
+  useCollections = (options = {}) => {
   return useQuery([`collection`, options], fetchCollectionData, {
+    keepPreviousData: true,
+  });
+};
+const useCollectionsTrending = (options = {}) => {
+  return useQuery([`useCollectionsTrending`, options], fetchCollectionDataTrending, {
     keepPreviousData: true,
   });
 };
@@ -38,4 +49,10 @@ const useMoralisNFTS = (options = {}) => {
     keepPreviousData: true,
   });
 };
-export { useCollections, useMoralisCollections, useMoralisNFTS, useMoralisCollectionsLazy };
+export {
+  useCollections,
+  useMoralisCollections,
+  useMoralisNFTS,
+  useCollectionsTrending,
+  useMoralisCollectionsLazy
+};

@@ -11,7 +11,7 @@ const fetchNftDataOfCollection = async ({ queryKey }) => {
 };
 
 const fetchNftTreandingArtwork = async ({ }) => {
-  const { data } = await http.get(`/nfts/getTrendingArtwork`);
+  const { data } = await http.get(`/nfts/tranding?limit=10`);
   return data
 };
 const fetchGameNFt = async ({ queryKey }) => {
