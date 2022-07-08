@@ -10,7 +10,8 @@ import Layout from '../components/Layout/Layout';
 import { useRegisterMutation } from '../hooks/Web2/mutations/useRegisterMutation';
 import { useRouter } from 'next/router';
 import { handleLogin, handleLogout } from '../utils/auth';
-
+import { Button, Form, Modal } from 'react-bootstrap';
+import CreateNewNft from '../components/Layout/CreateNewNft';
 const AddWallet = () => {
   const router = useRouter();
   const { mutate, isLoading: loading } = useRegisterMutation()
@@ -73,10 +74,26 @@ const AddWallet = () => {
       toast.success("Wallet Disconnected.")
     }
   }
+  const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
   return (
+    <>
     <Layout>
       <>
-        <div className='collection-widget-area pt-70 pb-70'>
+      {/* <Button variant="primary" onClick={handleShow}>
+        Launch demo modal
+      </Button> */}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <div className='collection-widget-area pt-70 pb-70'>
           <div className='container'>
             <div className="row height d-flex justify-content-center align-items-center">
               <div className="text-center">
@@ -130,6 +147,13 @@ const AddWallet = () => {
             </div>
           </div>
         </div>
+            </Form.Group>
+            
+          </Form>
+        </Modal.Body>
+       
+      </Modal>
+        
       </>
       {/* <div className='container'>
         <div className='row'>
@@ -143,7 +167,9 @@ const AddWallet = () => {
           >{isAuthenticated ? "Disconnect" : "Connect"}</button>
         </div>
       </div> */}
+    <CreateNewNft />
     </Layout>
+    </>
   );
 };
 

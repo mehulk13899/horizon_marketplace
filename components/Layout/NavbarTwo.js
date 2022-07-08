@@ -45,6 +45,11 @@ const NavbarTwo = () => {
 		window.addEventListener("scroll", showStickyMenu);
 	}
 
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
 	return (
 		<>
 			<div className="navbar-style2">
@@ -123,14 +128,11 @@ const NavbarTwo = () => {
 											<ul className="optional-item-list">
 												<li>
 
-													<Link
-														href="/add-wallet"
-														activeClassName="active"
-													>
-														<a className="active">{
-															web3Authentication == false ? "Connect Wallet" : "MeataMask Connected"
-														}</a>
-													</Link>
+												<a className="btnnew" onClick={handleShow}>
+										{web3Authentication == false
+											? "Connect Wallet"
+											: "MeataMask Connected"}
+									</a>
 												</li>
 											</ul>
 										</div>
