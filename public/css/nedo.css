@@ -1,3 +1,4 @@
+
 @import "https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500;600;700&amp;display=swap";
 * {
     -webkit-box-sizing: border-box;
@@ -1552,8 +1553,8 @@ select {
 .page-nav li a:hover i {
     color: #fff;
 }
-.owl-carousel .owl-nav button.owl-prev,
-.owl-carousel .owl-nav button.owl-next,
+/* .owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next, */
 .social-profile.style1 li a,
 .social-profile.style2 li a,
 .social-profile.style3 li a,
@@ -1594,7 +1595,7 @@ select {
 .author-details-box .single-author-info .author-metainfo-wrap,
 .auction-filter-btn,
 .product-filter-list,
-.owl-carousel .owl-nav,
+/* .owl-carousel .owl-nav, */
 .pp-post-item,
 .auction-item-wrap,
 .auction-card.style2 .auction-info-wrap .auction-end .countdown,
@@ -1613,8 +1614,8 @@ select {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.owl-carousel .owl-nav button.owl-prev,
-.owl-carousel .owl-nav button.owl-next,
+/* .owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next, */
 .social-profile.style1 li a,
 .social-profile.style2 li a,
 .social-profile.style3 li a,

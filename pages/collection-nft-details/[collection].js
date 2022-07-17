@@ -5,6 +5,13 @@ import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import { useWeb3 } from '../../providers/Web3Context';
 import { useGetCollectionByID } from '../../hooks/Web2/useCollections';
 import { useRouter } from 'next/router';
+import Link from "next/link";
+import http from '../../utils/http'
+import { ethers } from "ethers";
+import ABI from './../../contracts_abi/NFT.json';
+import bytecode from './../../contracts_abi/bytecode.json';
+import toast from 'react-hot-toast';
+const notify = (message) => toast(message);
 
 const Collection = ({ collection }) => {
 
@@ -22,7 +29,38 @@ const Collection = ({ collection }) => {
   } = useGetCollectionByID({
     id: collection
   })
-  console.log(nftBalance);
+  const onSubmit = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const signer = provider.getSigner()
+    const factory = new ethers.ContractFactory(ABI, bytecode, signer);
+    console.log(process.env.NEXT_PUBLIC_MARKETPLACE_MUMBAI_CONTRACT_ADDRESS, nftBalance?.collection_name, nftBalance?.collection_symbol)
+    const contract = await factory.deploy(process.env.NEXT_PUBLIC_MARKETPLACE_MUMBAI_CONTRACT_ADDRESS, nftBalance?.collection_name, nftBalance?.collection_symbol);
+    try {
+      const payload = {
+        "collection_address": contract?.address,
+        "metmask_created": true
+      };
+      console.log(payload);
+      await http.put(`/collection/${nftBalance?.id}`, payload).then(async (res) => {
+        if (res?.status == 201) {
+          notify(res?.data?.message)
+        }
+        else {
+          notify(res?.data?.message)
+        }
+      })
+        .catch((err) => {
+          notify(err?.response?.data?.message)
+        });
+
+    } catch (error) {
+      console.log(error);
+      const { data } = error.response.data;
+      if (data) {
+        notify(data[0].messages[0].message);
+      }
+    }
+  };
 
   if (isLoading) {
     return (
@@ -66,6 +104,29 @@ const Collection = ({ collection }) => {
                     }</h2>
                     <h3 className="textgraycolor mt-3 mb-4"><span className="textbluecolor">Last updated:</span> {nftBalance?.updated_at}</h3>
                     <p className="textgraycolor">{nftBalance?.description}</p>
+                    {nftBalance?.collection_address == undefined ?
+                      !isAuthenticated ?
+                        (
+                          <>
+                            <p className="textgraycolor">Your Collection is Not Created Yet Please Deploy Collection to Blockchain</p>
+                            <Link href="/add-wallet">
+                              <a className="default-btn border-radius-50">
+                                Connect Wallet
+                              </a>
+                            </Link>
+                          </>
+
+                        ) : (
+                          <>
+                            <p className="textgraycolor">Your Collection is Not Created Yet Please Deploy Collection to Blockchain</p>
+                            <a className="default-btn border-radius-50"
+                              onClick={() => onSubmit()}
+                            >
+                              {"Mint Now"}
+                            </a>
+                          </>
+                        ) : null
+                    }
                   </div>
 
                 </div>

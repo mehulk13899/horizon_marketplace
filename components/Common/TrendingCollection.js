@@ -14,8 +14,8 @@ const options = {
 	autoplay: true,
 	smartSpeed: 500,
 	navText: [
-		"<i className='ri-arrow-left-s-line'></i>",
-		"<i className='ri-arrow-right-s-line'></i>",
+		"<",
+		" >",
 	],
 	responsive: {
 		0: {
