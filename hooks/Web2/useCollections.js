@@ -21,6 +21,13 @@ const fetchMoralisNFTS = async ({ queryKey }) => {
   const { data } = await http.post('/moralis/getNft', queryKey[1]);
   return data;
 };
+const fetchCollectionByid = async ({ queryKey }) => {
+  if (queryKey[1]?.id == undefined) {
+    return {};
+  }
+  const { data } = await http.get(`/collection/${queryKey[1].id}`);
+  return data
+};
 const
   useCollections = (options = {}) => {
   return useQuery([`collection`, options], fetchCollectionData, {
@@ -49,10 +56,16 @@ const useMoralisNFTS = (options = {}) => {
     keepPreviousData: true,
   });
 };
+const useGetCollectionByID = (options = {}) => {
+  return useQuery([`collection_id_${options?.id}`, options], fetchCollectionByid, {
+    keepPreviousData: true,
+  });
+};
 export {
   useCollections,
   useMoralisCollections,
   useMoralisNFTS,
   useCollectionsTrending,
-  useMoralisCollectionsLazy
+  useMoralisCollectionsLazy,
+  useGetCollectionByID
 };

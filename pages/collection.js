@@ -36,7 +36,7 @@ const Collection = () => {
                         cursor: "pointer"
                       }}
                       onClick={() => {
-                        router.push(`/collection-nft-details/${collection?.token_address}`)
+                        router.push(`/collection-nft-details/${collection?.id}`)
                       }
                       }
                       onError={({ currentTarget }) => {
@@ -45,13 +45,13 @@ const Collection = () => {
                       }}
                     />
                     <button type='button' className='default-btn border-radius-5' onClick={() =>
-                      router.push(`/collection-nft-details/${collection?.token_address}`)}>
+                      router.push(`/collection-nft-details/${collection?.id}`)}>
                       Open Collection
                     </button>
                   </div>
                   <div className="bgdarkbluecolor aboutitemcnt">
                     <div className="itemtitlecode">
-                      <h2 className="textgraycolor">{collection?.name}</h2>
+                      <h2 className="textgraycolor">{collection?.collection_name}</h2>
                     </div>
                     <div className="itemtitlePrice">
                       <h2 className="textgraycolor">{collection?.contract_type}</h2>

@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 export default function CollectionDetails({ collection }) {
     const router = useRouter()
+    console.log(collection);
     return (
         <div className="article">
             <div className='featured-card box-shadow'>
@@ -20,7 +21,9 @@ export default function CollectionDetails({ collection }) {
                 </div>
                 <div className='content'>
                     <h3>
-                        <span>{collection?.collection_name}</span>
+                        <span
+                            style={{ color: "#000000" }}
+                        >{collection?.collection_name}</span>
                     </h3>
                     <div className='content-in'>
                         <div className='featured-card-left'>

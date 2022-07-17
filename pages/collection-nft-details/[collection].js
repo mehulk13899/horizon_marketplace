@@ -3,73 +3,26 @@ import Loader from '../../components/Common/Loader';
 import Layout from '../../components/Layout/Layout';
 import { useMoralis, useMoralisWeb3Api } from 'react-moralis';
 import { useWeb3 } from '../../providers/Web3Context';
-import { useIPFS } from '../../hooks/Web3/useIPFS';
-import { useQuery } from 'react-query';
+import { useGetCollectionByID } from '../../hooks/Web2/useCollections';
+import { useRouter } from 'next/router';
 
 const Collection = ({ collection }) => {
 
+  const router = useRouter();
   const { Moralis, isWeb3Enabled, isAuthenticated } = useMoralis();
   const { state: { walletAddress, networkId } } = useWeb3();
-  const { resolveLink } = useIPFS();
   const [collectionData, setCollectionData] = useState({
     totalItems: 0,
     totalOwners: 0,
     totalvolumes: 0,
     floorprice: 0
   })
-  const nftBalanceJson = async (data) => {
-    if (data?.result) {
-      let NFTs = data?.result;
-      for (let NFT of NFTs) {
-        if (NFT?.metadata) {
-          NFT.metadata = JSON.parse(NFT.metadata);
-          NFT.image_url = resolveLink(NFT.metadata?.image);
-        } else if (NFT?.token_uri) {
-          try {
-            await fetch(NFT.token_uri)
-              .then(async (response) => await response.json())
-              .then((data) => {
-                NFT.image_url = resolveLink(data.image);
-              });
-          } catch (error) {
-          }
-        }
-      }
-      return NFTs;
-    }
-  };
 
-  const setData = async () => {
-    const options = { chain: networkId, address: walletAddress, token_address: collection };
-    const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
-    const data = await nftBalanceJson(polygonNFTs);
-    var dataTemp = [...data];
-    var finalObjec = {
-      totalItems: data?.length ? data.length : 0,
-      totalvolumes: 0,
-      floorprice: 0
-    }
-    var ownerList = [];
-    dataTemp.map((nft) => {
-      if (!ownerList.includes(nft?.owner_of)) {
-        ownerList.push(nft?.owner_of)
-      }
-
-    })
-    finalObjec.totalOwners = ownerList.length;
-    setCollectionData(finalObjec);
-    return data;
-  };
-  const { data: nftBalance, isLoading, refetch } = useQuery([`collectionnft_${collection}`], setData, {
-    keepPreviousData: true,
-    enabled: false
-  });
-  useEffect(() => {
-    if (isWeb3Enabled && isAuthenticated)
-    {
-      refetch()
-    }
-  }, [isWeb3Enabled, networkId, walletAddress]);
+  const { data: nftBalance, isLoading
+  } = useGetCollectionByID({
+    id: collection
+  })
+  console.log(nftBalance);
 
   if (isLoading) {
     return (
@@ -109,10 +62,10 @@ const Collection = ({ collection }) => {
                   </div>
                   <div className="prCnt">
                     <h2 className="textwhitecolor">{
-                      nftBalance && nftBalance[0]?.name
+                      nftBalance && nftBalance?.collection_name
                     }</h2>
-                    <h3 className="textgraycolor mt-3 mb-4"><span className="textbluecolor">Last updated:</span> October 21st,  2021 at 3 AM</h3>
-                    <p className="textgraycolor">There are many variations of passages of Lorem Ipsum available, but<br /> the majority have suffered alteration in some form, by injected</p>
+                    <h3 className="textgraycolor mt-3 mb-4"><span className="textbluecolor">Last updated:</span> {nftBalance?.updated_at}</h3>
+                    <p className="textgraycolor">{nftBalance?.description}</p>
                   </div>
 
                 </div>
@@ -194,7 +147,7 @@ const Collection = ({ collection }) => {
                 </div>
                 <div className="row mt-2 mt-md-5">
                   {
-                    nftBalance?.map((nft) => (
+                    nftBalance?.nfts?.map((nft) => (
                       <>
                         <div className="col-md-6 col-xl-3 mb-4" key={nft?.token_uri}>
                           <div className="aboutitem">
@@ -208,7 +161,7 @@ const Collection = ({ collection }) => {
                                   cursor: "pointer"
                                 }}
                                 onClick={() => {
-                                  router.push(`/nft/${nft?.token_id}`)
+                                  router.push(`/nft/${nft?.id}`)
                                 }
                                 }
                                 onError={({ currentTarget }) => {
@@ -256,21 +209,58 @@ export async function getServerSideProps(ctx) {
   };
 }
 export default Collection;
-{/* <>
-                <div className='row justify-content-left'>
-                  <div className='border border-red'>
-                    <div className='row justify-content-ceneter'>
-                      <div className='pt-4'></div>
-                      <RenderNFTInTabs
-                        openDialogTitle={"Open Now"}
-                        editOrDelete={false}
-                        user={users?.user}
-                        formCollection={true}
-                        nfts={data?.nfts ? data?.nfts : []}
-                        message="This Collection Don't Have Any NFT"
-                      />
-                    </div>
-                  </div>
 
-                </div>
-              </> */}
+// const { resolveLink } = useIPFS();
+
+// const nftBalanceJson = async (data) => {
+//   if (data?.result) {
+//     let NFTs = data?.result;
+//     for (let NFT of NFTs) {
+//       if (NFT?.metadata) {
+//         NFT.metadata = JSON.parse(NFT.metadata);
+//         NFT.image_url = resolveLink(NFT.metadata?.image);
+//       } else if (NFT?.token_uri) {
+//         try {
+//           await fetch(NFT.token_uri)
+//             .then(async (response) => await response.json())
+//             .then((data) => {
+//               NFT.image_url = resolveLink(data.image);
+//             });
+//         } catch (error) {
+//         }
+//       }
+//     }
+//     return NFTs;
+//   }
+// };
+
+// const setData = async () => {
+//   const options = { chain: networkId, address: walletAddress, token_address: collection };
+//   const polygonNFTs = await Moralis.Web3API.account.getNFTs(options);
+//   const data = await nftBalanceJson(polygonNFTs);
+//   var dataTemp = [...data];
+//   var finalObjec = {
+//     totalItems: data?.length ? data.length : 0,
+//     totalvolumes: 0,
+//     floorprice: 0
+//   }
+//   var ownerList = [];
+//   dataTemp.map((nft) => {
+//     if (!ownerList.includes(nft?.owner_of)) {
+//       ownerList.push(nft?.owner_of)
+//     }
+
+//   })
+//   finalObjec.totalOwners = ownerList.length;
+//   setCollectionData(finalObjec);
+//   return data;
+// };
+// const { data: nftBalance, isLoading, refetch } = useQuery([`collectionnft_${collection}`], setData, {
+//   keepPreviousData: true,
+//   enabled: false
+// });
+// useEffect(() => {
+//   if (isWeb3Enabled && isAuthenticated) {
+//     refetch()
+//   }
+// }, [isWeb3Enabled, networkId, walletAddress]);

@@ -46,4 +46,5 @@ const useGetNftByID = (options = {}) => {
     keepPreviousData: true,
   });
 };
+
 export { useNftOfCollection, useNftTreandingArtwork, useGameNft, useGetNftByID };

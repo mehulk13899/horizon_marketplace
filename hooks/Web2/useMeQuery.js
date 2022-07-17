@@ -42,6 +42,14 @@ const fetchtopAuthor = async ({ }) => {
   const { data } = await http.get(`/getAllUser`);
   return data
 };
+const fetchtopNFT = async ({ }) => {
+  const { data } = await http.get(`/nfts/tranding`);
+  return data
+};
+const fetchtopCollection = async ({ }) => {
+  const { data } = await http.get(`/collection/tranding`);
+  return data
+};
 const useAuthorQuery = (options = {}) => {
   if (options?.author_name) {
     return useQuery([`user_${options.author_name}`, options], fetchAuthorData, {
@@ -73,6 +81,16 @@ const useGetTopAuthor = (options = {}) => {
     keepPreviousData: true,
   });
 };
+const useGetTopNFT = (options = {}) => {
+  return useQuery([`useGetTopNFT`, options], fetchtopNFT, {
+    keepPreviousData: true,
+  });
+};
+const useGetTopCollection = (options = {}) => {
+  return useQuery([`useGetTopCollection`, options], fetchtopCollection, {
+    keepPreviousData: true,
+  });
+};
 export {
   useMeQuery,
   useSavednftsQuery,
@@ -80,5 +98,7 @@ export {
   useAuthorQuery,
   useAuctionByUser,
   useGetTopAuthor,
-  useFollowerQuery
+  useFollowerQuery,
+  useGetTopNFT,
+  useGetTopCollection
 };

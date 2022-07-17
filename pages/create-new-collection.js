@@ -23,12 +23,13 @@ export default function CreateNft() {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         const signer = provider.getSigner()
         const factory = new ethers.ContractFactory(ABI, bytecode, signer)
-        const contract = await factory.deploy(process.env.NEXT_PUBLIC_NFTTOKEN_RINKEYBY_ADDRESS, dataTemp?.collection_name, dataTemp?.symbol);
+        const contract = await factory.deploy(process.env.NEXT_PUBLIC_MARKETPLACE_MUMBAI_CONTRACT_ADDRESS, dataTemp?.collection_name, dataTemp?.symbol);
         try {
             const payload = {
                 ...dataTemp,
                 "category": selectedCategory,
-                "collection_address": contract?.address
+                "collection_address": contract?.address,
+                "metmask_created": true
             };
             await http.post('/collection', payload).then(async (res) => {
                 if (res?.status == 201) {

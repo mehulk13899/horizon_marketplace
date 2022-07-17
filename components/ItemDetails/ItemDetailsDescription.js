@@ -1,12 +1,79 @@
 import React from "react";
 import Link from "next/link";
 import formatDate from "../../utils/formatDate";
-
+import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
+import { useQueryClient } from "react-query";
+import { useWeb3 } from './../../providers/Web3Context';
+import http from './../../utils/http'
+import toast from "react-hot-toast";
 const ItemDetailsDescription = ({
 	data,
-	collectionName = "Cryptonium",
+	collectionName = "Horizon",
 	size,
 }) => {
+	const queryClient = useQueryClient();
+	const { Moralis, isAuthenticated } = useMoralis();
+	const contractProcessor = useWeb3ExecuteFunction();
+	const { state: { nftTokenABI } } = useWeb3()
+	async function mintNFT(tokenURI) {
+		let options = {
+			contractAddress: data?.collection[0].collection_address,
+			functionName: "createToken",
+			abi: nftTokenABI,
+			params: {
+				tokenURI: tokenURI,
+			},
+		};
+		await contractProcessor.fetch({
+			params: options,
+			onSuccess: async (res) => {
+				queryClient.invalidateQueries('USER')
+				queryClient.invalidateQueries('USERBlockChainNFTs')
+				await http.put(`/nfts/update_nft/${data?.id}`, {
+					"nft_is_minted": true,
+				}).then((res) => {
+
+					if (res.data.status_code == 200)
+						toast.success("Your NFT is Created.")
+
+				}).catch((err) => {
+					console.log(err)
+				})
+			},
+			onError: (error) => {
+				console.log(error);
+			},
+		});
+	}
+	const onSubmit = async () => {
+
+		if (data?.nft_is_minted == true) {
+			toast.success("Your NFT is Already Minted");
+			return;
+		}
+		const { attributes, created_at, description,
+			edition, name, unique_string } = data;
+
+		const nftDataJson = {
+			attributes, created_at,
+			description,
+			created_by: data?.author?.username,
+			cryptoCost: data?.final_value,
+			cryptoType: data?.cryptoType,
+			edition, name, unique_string,
+			image: data?.image_url,
+		};
+		if (!isAuthenticated) {
+			toast.success("Please Connect Web3.0 Wallet")
+			return;
+		}
+		const file = new Moralis.File("file.json", {
+			base64: btoa(JSON.stringify(nftDataJson, undefined, 1)),
+			type: 'json'
+		});
+		const moralisFileJson = await file.saveIPFS();
+		await mintNFT(moralisFileJson._ipfs);
+	}
 	return (
 		<>
 			<div className="container">
@@ -40,7 +107,7 @@ const ItemDetailsDescription = ({
 									<h3>Collection</h3>
 									<div className="content">
 										<div className="images">
-											<a href={`/collection-nft-details/${data?.collection[0]?.collection_id}`}>
+											<a href={`/collection-nft-details/${data?.collection[0]?.id}`}>
 												<img
 													src={data?.collection[0]?.collection_logo_image ? data?.collection[0]?.collection_logo_image : "../images/author/author-user13.png"}
 													alt="Images"
@@ -106,11 +173,22 @@ const ItemDetailsDescription = ({
 								<h3 className="item-right-eth">15,00 ETH</h3>
 							</div>
 						</div> */}
-
 						<div className="item-details-btn">
-							<Link href="/add-wallet">
-								<a className="default-btn border-radius-50"> Request To Author</a>
-							</Link>
+							{!isAuthenticated ?
+								(
+									<Link href="/add-wallet">
+										<a className="default-btn border-radius-50">
+											Connect Wallet
+										</a>
+									</Link>	
+								) : (
+									<a className="default-btn border-radius-50"
+										onClick={() => onSubmit()}
+									>
+										{data?.nft_is_minted ? "Already Mint" : "Mint Now"}
+									</a>
+								)
+							}
 						</div>
 					</div>
 				</div>

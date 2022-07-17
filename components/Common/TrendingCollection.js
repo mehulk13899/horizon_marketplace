@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import NftCardWithoutTime from "./NftCardWithoutTime";
-import { useGetTopNFT } from "../../hooks/Web2/useMeQuery";
+import { useGetTopCollection } from "../../hooks/Web2/useMeQuery";
+import CollectionDetails from "../Collection/CollectionDetails";
 const OwlCarousel = dynamic(import("react-owl-carousel3"));
 
 const options = {
@@ -33,10 +33,10 @@ const options = {
 	},
 };
 
-const TrendingArea = ({ bg }) => {
+const TrendingCollection = ({ bg }) => {
 	const [display, setDisplay] = useState(false);
 	const [isMounted, setisMounted] = useState(false);
-	const { data } = useGetTopNFT();
+	const { data } = useGetTopCollection();
 	useEffect(() => {
 		setisMounted(true);
 		setDisplay(true);
@@ -48,7 +48,7 @@ const TrendingArea = ({ bg }) => {
 					<div className="row">
 						<div className="col-lg-8 col-md-6">
 							<div className="section-title">
-								<h2>Trending NFTs</h2>
+								<h2>Trending Collection</h2>
 							</div>
 						</div>
 
@@ -65,11 +65,12 @@ const TrendingArea = ({ bg }) => {
 					<div className="trending-slider pt-45">
 						{display ? (
 							<OwlCarousel {...options}>
-								{data?.map((nft) => {
+								{data?.filter((d) => d.collection_cover_image != undefined)?.map((nft) => {
 									return (
-										<NftCardWithoutTime
-											data={nft}
+										< CollectionDetails
+											collection={nft}
 											key={nft.id}
+
 										/>
 									);
 								})}
@@ -84,4 +85,4 @@ const TrendingArea = ({ bg }) => {
 	);
 };
 
-export default TrendingArea;
+export default TrendingCollection;

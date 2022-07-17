@@ -1,10 +1,11 @@
 import baseUrl from "../../utils/baseUrl";
 import ItemDetailsHistory from "../../components/ItemDetails/ItemDetailsHistory";
 import ItemDetailsDescription from "../../components/ItemDetails/ItemDetailsDescription";
-
+import { useMoralis } from "react-moralis";
+import Layout from './../../components/Layout/Layout'
 const ItemDetails = ({ data }) => {
 	return (
-		<>
+		<Layout>
 			<div className="item-details-area pt-100 pb-70">
 				<div className="container">
 					<div className="row">
@@ -28,7 +29,7 @@ const ItemDetails = ({ data }) => {
 					</div>
 				</div>
 			</div>
-		</>
+		</Layout>
 	);
 };
 

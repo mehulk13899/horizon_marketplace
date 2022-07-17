@@ -30,6 +30,7 @@ export const redirectUser = (ctx, location) => {
  */
 export const handleLogout = () => {
 	localStorage.removeItem('walletAddress')
+	localStorage.removeItem('previous_path')
 	removeAuthCredentials()
 };
 

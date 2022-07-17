@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import SearchModal from "./SearchModal";
 import Link from "../../utils/ActiveLink";
 import MenusList from "./MenusList";
 import { handleLogout } from "../../utils/auth";
 import { useMoralis } from "react-moralis";
 import { useWeb3 } from "../../providers/Web3Context";
 import { Actions } from "../../providers/Web3Context/reducer";
+import { useRouter } from "next/router";
 
 const NavbarTwo = () => {
-
+	const router = useRouter()
 	const [showMenu, setShowMenu] = useState(false);
 	const [showWallet, setShowWallet] = useState(false);
 	const [showSearchModal, setShowSearchModal] = useState(false);
@@ -19,7 +19,10 @@ const NavbarTwo = () => {
 		setShowMenu(!showMenu);
 	};
 
-	useEffect(() => { }, [user]);
+	useEffect(() => {
+		if (router?.asPath != '/add-wallet')
+			localStorage.setItem("previous_path", router?.asPath)
+	}, [router]);
 
 	const toggleWallet = () => {
 		setShowWallet(!showWallet);
@@ -63,16 +66,21 @@ const NavbarTwo = () => {
 									)}
 								</div>
 								<div className="logo">
-									<img
-										style={{
-											objectFit: 'contain',
-											width: "25%",
-											marginLeft:10,
-											height: "70px"
-										}}
-										src="../images/logo-2.png"
-										alt="Footer Logo"
-									/>
+									<Link
+										href={"/"}
+										activeClassName="active"
+									>
+										<img
+											style={{
+												objectFit: 'contain',
+												width: "25%",
+												marginLeft: 10,
+												height: "70px"
+											}}
+											src="../images/logo-2.png"
+											alt="Footer Logo"
+										/>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -88,7 +96,7 @@ const NavbarTwo = () => {
 						<MenusList logo="" user={user} />
 					</div>
 
-					<div className="mobile-nav">
+					{/* <div className="mobile-nav">
 						<div
 							className="search-btn global-pointer"
 							onClick={() => toggleSearchModal()}
@@ -97,7 +105,7 @@ const NavbarTwo = () => {
 								<i className="ri-search-line"></i>
 							</a>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="side-nav-responsive">
 						<div className="container-max">
@@ -142,10 +150,10 @@ const NavbarTwo = () => {
 				</div>
 			</div>
 
-			<SearchModal
+			{/* <SearchModal
 				showSearchModal={showSearchModal}
 				toggleSearchModal={toggleSearchModal}
-			/>
+			/> */}
 		</>
 	);
 };

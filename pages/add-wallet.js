@@ -1,5 +1,4 @@
 import { useMoralis } from 'react-moralis';
-import Chains from '../components/Common/Chains';
 import toast, { Toaster } from 'react-hot-toast';
 import React, { useState } from 'react';
 import { useWeb3 } from '../providers/Web3Context';
@@ -45,7 +44,7 @@ const AddWallet = () => {
                 onSuccess: (res) => {
                   if (res?.data?.statusCode == 200) {
                     handleLogin(res?.data);
-                    router.replace('/profile')
+                    router.replace(localStorage.getItem('previous_path') != undefined ? localStorage.getItem('previous_path') : "/")
                     dispatch({ type: Actions.SET_USER, user: res?.data?.user })
                   }
                   else {

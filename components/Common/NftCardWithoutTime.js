@@ -16,16 +16,10 @@ const NftCardWithoutTime = ({ data }) => {
 				<button
 					type="button"
 					className="default-btn border-radius-5"
-					onClick={() => router.push("/add-wallet")}
+					onClick={() => router.push(`/nft/${data?.id}`)}
 				>
-					Place Bid
+					Open NFT
 				</button>
-				{/* <div className="trending-title">
-					<span>
-						{data?.cryptoCost} {data?.cryptoType} 12/14
-					</span>
-					<h3>Bid 80 ETH</h3>
-				</div> */}
 				<div className="trending-user">
 					<AuthorLink
 						data={
