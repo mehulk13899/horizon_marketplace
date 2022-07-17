@@ -133,7 +133,7 @@ const ItemDetailsDescription = ({
 								</li>
 								<li>
 									Created
-									<b>: {formatDate(data?.date ? data?.date : new Date())}</b>
+									<b>: {formatDate(data?.created_at ? new Date(data?.created_at).toDateString() : new Date())}</b>
 								</li>
 								<li>
 									Collection

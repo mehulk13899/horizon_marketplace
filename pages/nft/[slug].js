@@ -4,6 +4,7 @@ import ItemDetailsDescription from "../../components/ItemDetails/ItemDetailsDesc
 import { useMoralis } from "react-moralis";
 import Layout from './../../components/Layout/Layout'
 const ItemDetails = ({ data }) => {
+	console.log(data?.bids)
 	return (
 		<Layout>
 			<div className="item-details-area pt-100 pb-70">
@@ -17,7 +18,7 @@ const ItemDetails = ({ data }) => {
 										alt="Images"
 									/>
 								</div>
-								<ItemDetailsHistory />
+								<ItemDetailsHistory bids={data?.bids} />
 							</div>
 						</div>
 
